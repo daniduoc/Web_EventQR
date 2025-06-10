@@ -1,7 +1,6 @@
 package com.example.demo.Model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -21,7 +20,4 @@ public class Evento {
     private String estado;
 
     private Long organizadorId;
-
-    @ElementCollection
-    private List<Long> estudiantesIds; 
 }

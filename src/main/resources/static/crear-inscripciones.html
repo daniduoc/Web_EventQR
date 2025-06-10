@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Inscripcion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crear Nueva Inscripcion</h1>
+    <form id="inscripcionForm">
+        <label for="estudiante">Id Estudiante:</label>
+        <input type="number" id="estudiante" name="estudiante" min="0" required>
+
+        <label for="evento">Id Evento:</label>
+        <input type="number" id="evento" name="evento" min="0" required>
+
+        <label for="fecha">Fecha y Hora:</label>
+        <input type="datetime-local" id="fecha" name="fecha" required>
+
+        <button type="submit">Crear Inscripcion</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('inscripcionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const inscripcion = {
+                estudianteId: document.getElementById('estudiante').value,
+                eventoId: document.getElementById('evento').value,
+                fecha: document.getElementById('fecha').value
+            };
+
+            fetch('http://localhost:8080/api/v1/inscripciones/registrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(inscripcion)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.message || 'Error al crear la inscripcion'); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('resultado').innerHTML = 
+                    `<p class="success">Inscripcion creada exitosamente: ${data.estudianteId} (ID: ${data.eventoId})</p>`;
+                document.getElementById('inscripcionForm').reset();
+            })
+            .catch(error => {
+                document.getElementById('resultado').innerHTML = 
+                    `<p class="error">${error.message}</p>`;
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
