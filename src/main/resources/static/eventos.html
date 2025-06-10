@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventQR - Eventos Universitarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+        
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .filter-dropdown {
+            min-width: 200px;
+        }
+        
+        .filter-dropdown select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .event-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+        
+        .event-details {
+            padding: 20px;
+        }
+        
+        .event-date {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .event-title {
+            font-size: 20px;
+            margin: 0 0 10px 0;
+            color: var(--secondary-color);
+        }
+        
+        .event-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .event-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-light);
+        }
+        
+        .event-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-disabled {
+            background-color: #95a5a6;
+            color: white;
+            cursor: not-allowed;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .tag-academic {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .tag-social {
+            background-color: #f3e5f5;
+            color: #8e24aa;
+        }
+        
+        .tag-sports {
+            background-color: #e8f5e9;
+            color: #43a047;
+        }
+        
+        .tag-cultural {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .search-filter {
+                flex-direction: column;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Event<span>QR</span></h1>
+            </div>
+            <div class="user-menu">
+                <span>Hola, Juan Pérez</span>
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil">
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Próximos Eventos Universitarios</h1>
+        </div>
+        
+        <div class="search-filter">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar eventos...">
+            </div>
+            <div class="filter-dropdown">
+                <select>
+                    <option value="">Todos los eventos</option>
+                    <option value="academic">Académicos</option>
+                    <option value="cultural">Culturales</option>
+                    <option value="sports">Deportivos</option>
+                    <option value="social">Sociales</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="events-grid">
+            <!-- Evento 1 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Conferencia de Tecnología">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">15 OCT 2023</span>
+                    <span class="tag tag-academic">Académico</span>
+                    <h3 class="event-title">Conferencia de Innovación Tecnológica</h3>
+                    <p class="event-description">Únase a destacados expertos en tecnología mientras exploran las últimas tendencias en IA, blockchain y computación cuántica.</p>
+                    <div class="event-meta">
+                        <span class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Auditorio Principal
+                        </span>
+                        <span><i class="fas fa-users"></i> 45/100</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary">Inscribirme</button>
+                        <button class="btn btn-outline">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evento 2 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Festival Cultural">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">20 OCT 2023</span>
+                    <span class="tag tag-cultural">Cultural</span>
+                    <h3 class="event-title">Festival Cultural Internacional</h3>
+                    <p class="event-description">Celebra la diversidad cultural con presentaciones de música, danza y gastronomía de diferentes países del mundo.</p>
+                    <div class="event-meta">
+                        <span class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Plaza Central
+                        </span>
+                        <span><i class="fas fa-users"></i> 120/200</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary">Inscribirme</button>
+                        <button class="btn btn-outline">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evento 3 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Torneo de Fútbol">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">25 OCT 2023</span>
+                    <span class="tag tag-sports">Deportivo</span>
+                    <h3 class="event-title">Torneo Interfacultades de Fútbol</h3>
+                    <p class="event-description">Participa o apoya a tu facultad en este emocionante torneo de fútbol. ¡Premios para los primeros lugares!</p>
+                    <div class="event-meta">
+                        <span class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Cancha Deportiva
+                        </span>
+                        <span><i class="fas fa-users"></i> 8/16 equipos</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary">Inscribir equipo</button>
+                        <button class="btn btn-outline">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evento 4 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Feria de Empleo">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">5 NOV 2023</span>
+                    <span class="tag tag-social">Social</span>
+                    <h3 class="event-title">Feria de Empleo y Prácticas Profesionales</h3>
+                    <p class="event-description">Conoce a representantes de las principales empresas del país y encuentra oportunidades laborales y de prácticas.</p>
+                    <div class="event-meta">
+                        <span class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Edificio de Posgrados
+                        </span>
+                        <span><i class="fas fa-users"></i> 78/150</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary">Inscribirme</button>
+                        <button class="btn btn-outline">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evento 5 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Taller de Robótica">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">12 NOV 2023</span>
+                    <span class="tag tag-academic">Académico</span>
+                    <h3 class="event-title">Taller de Robótica para Principiantes</h3>
+                    <p class="event-description">Aprende los fundamentos de la robótica y construye tu primer robot en este taller práctico de 2 días.</p>
+                    <div class="event-meta">
+                        <span class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Laboratorio de Ingeniería
+                        </span>
+                        <span><i class="fas fa-users"></i> 15/20</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-disabled">Cupo lleno</button>
+                        <button class="btn btn-outline">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Evento 6 -->
+            <div class="event-card">
+                <div class="event-image">
+                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Maratón Universitaria">
+                </div>
+                <div class="event-details">
+                    <span class="event-date">20 NOV 2023</span>
+                    <span class="tag tag-sports">Deportivo</span>
+                    <h3 class="event-title">5K Maratón Universitaria</h3>
+                    <p class="event-description">Participa en nuestra carrera anual 5K. Todo lo recaudado será donado a becas para estudiantes de bajos recursos.</p>
+                    <div class="event-meta">
+                        <span class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Punto de partida: Rectoría
+                        </span>
+                        <span><i class="fas fa-users"></i> 210/300</span>
+                    </div>
+                    <div class="event-actions">
+                        <button class="btn btn-primary">Inscribirme</button>
+                        <button class="btn btn-outline">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>EventQR</h3>
+                <p>Plataforma de gestión de eventos universitarios que conecta a estudiantes con actividades académicas, culturales y deportivas.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces rápidos</h3>
+                <a href="#">Eventos</a>
+                <a href="#">Mis inscripciones</a>
+                <a href="#">Calendario</a>
+                <a href="#">Contacto</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> contacto@eventqr.edu</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-map-marker-alt"></i> Universidad Nacional, Ciudad Universitaria</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 EventQR. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Función para manejar la inscripción a eventos
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.classList.contains('btn-disabled')) {
+                    const eventTitle = this.closest('.event-card').querySelector('.event-title').textContent;
+                    if (confirm(`¿Estás seguro que quieres inscribirte a "${eventTitle}"?`)) {
+                        this.textContent = 'Inscrito ✓';
+                        this.classList.add('btn-disabled');
+                        this.classList.remove('btn-primary');
+                        
+                        // Actualizar contador de participantes (simulación)
+                        const participantsText = this.closest('.event-card').querySelector('.event-meta span:last-child');
+                        const [current, max] = participantsText.textContent.split('/').map(str => parseInt(str.replace(/\D/g, '')));
+                        if (!isNaN(current) && !isNaN(max)) {
+                            participantsText.textContent = ` ${current + 1}/${max}`;
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Función para buscar eventos
+        document.querySelector('.search-bar input').addEventListener('input', function(e) {
+            const searchTerm = this.value.toLowerCase();
+            document.querySelectorAll('.event-card').forEach(card => {
+                const title = card.querySelector('.event-title').textContent.toLowerCase();
+                const description = card.querySelector('.event-description').textContent.toLowerCase();
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        
+        // Función para filtrar eventos por categoría
+        document.querySelector('.filter-dropdown select').addEventListener('change', function(e) {
+            const filterValue = this.value;
+            document.querySelectorAll('.event-card').forEach(card => {
+                if (filterValue === '' || card.querySelector('.tag').classList.contains(`tag-${filterValue}`)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
