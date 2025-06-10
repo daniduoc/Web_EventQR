@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Evento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crear Nuevo Evento</h1>
+    <form id="eventoForm">
+        <label for="nombre">Nombre del Evento:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+
+        <label for="fecha">Fecha y Hora:</label>
+        <input type="datetime-local" id="fecha" name="fecha" required>
+
+        <label for="precio">Precio ($):</label>
+        <input type="number" id="precio" name="precio" min="0" required>
+
+        <label for="cupos">Cupos Disponibles:</label>
+        <input type="number" id="cupos" name="cupos" min="1" required>
+
+        <button type="submit">Crear Evento</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('eventoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const evento = {
+                nombre: document.getElementById('nombre').value,
+                descripcion: document.getElementById('descripcion').value,
+                fecha: document.getElementById('fecha').value,
+                precio: parseFloat(document.getElementById('precio').value),
+                cupos: parseInt(document.getElementById('cupos').value),
+                estado: "ACTIVO"  // Valor por defecto
+            };
+
+            fetch('http://localhost:8080/api/v1/eventos/registrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(evento)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.message || 'Error al crear el evento'); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('resultado').innerHTML = 
+                    `<p class="success">Evento creado exitosamente: ${data.nombre} (ID: ${data.id})</p>`;
+                document.getElementById('eventoForm').reset();
+            })
+            .catch(error => {
+                document.getElementById('resultado').innerHTML = 
+                    `<p class="error">${error.message}</p>`;
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
