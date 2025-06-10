@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EventQR - Home</title>
+    <title>EventQR - Gestión de Eventos Universitarios</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -446,9 +446,6 @@
         color: #bdc3c7;
         font-size: 14px;
       }
-      .hidden {
-        display: none;
-      }
 
       /* Responsive Styles */
       @media (max-width: 768px) {
@@ -494,6 +491,7 @@
     </style>
   </head>
   <body>
+    <!-- Header -->
     <header>
       <nav class="navbar">
         <div class="logo">
@@ -506,39 +504,306 @@
           <a href="#about">Nosotros</a>
         </div>
         <div class="auth-buttons">
-          <a href="login.html" class="btn btn-outline" id="btn-login"
-            >Iniciar Sesión</a
-          >
-          <a href="registro.html" class="btn btn-primary" id="btn-signin"
-            >Registrarse</a
-          >
-
-          <a href="#" class="btn btn-primary hidden" id="btn-logout"
-            >Cerrar Sesión</a
-          >
+          <a href="login.html" class="btn btn-outline">Iniciar Sesión</a>
+          <a href="registro.html" class="btn btn-primary">Registrarse</a>
         </div>
       </nav>
     </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Conecta con la vida universitaria</h1>
+        <p>
+          Descubre, participa y gestiona todos los eventos de tu universidad en
+          un solo lugar con EventQR
+        </p>
+        <div class="hero-buttons">
+          <a href="registro.html" class="btn btn-primary">Únete ahora</a>
+          <a href="#events" class="btn btn-outline">Ver eventos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="section-title">
+        <h2>Simplificamos tu experiencia universitaria</h2>
+        <p>
+          EventQR ofrece las herramientas perfectas para que no te pierdas
+          ningún evento importante en tu vida académica
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>Gestión Centralizada</h3>
+          <p>
+            Todos los eventos universitarios en una sola plataforma, organizados
+            por fecha, categoría y facultad.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-qrcode"></i>
+          </div>
+          <h3>Registro Rápido</h3>
+          <p>
+            Inscripción instantánea a eventos con código QR y confirmación
+            inmediata en tu dispositivo móvil.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3>Notificaciones</h3>
+          <p>
+            Recibe recordatorios personalizados para los eventos a los que te
+            has inscrito.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Preview -->
+    <section class="events-preview" id="events">
+      <div class="events-container">
+        <div class="events-header">
+          <div class="section-title" style="text-align: left; margin: 0">
+            <h2>Próximos Eventos Destacados</h2>
+            <p>No te pierdas estas increíbles oportunidades</p>
+          </div>
+          <a href="eventos.html" class="btn btn-outline">Ver todos</a>
+        </div>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-image">
+              <img
+                src="https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="Conferencia de Liderazgo"
+              />
+            </div>
+            <div class="event-details">
+              <span class="event-date">10 OCT 2023</span>
+              <h3 class="event-title">
+                Conferencia: Liderazgo en el Siglo XXI
+              </h3>
+              <div class="event-meta">
+                <span
+                  ><i class="fas fa-map-marker-alt"></i> Auditorio Central</span
+                >
+                <span><i class="fas fa-users"></i> 45/100</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-card">
+            <div class="event-image">
+              <img
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="Festival Cultural"
+              />
+            </div>
+            <div class="event-details">
+              <span class="event-date">15 OCT 2023</span>
+              <h3 class="event-title">Festival Cultural Internacional</h3>
+              <div class="event-meta">
+                <span
+                  ><i class="fas fa-map-marker-alt"></i> Plaza Principal</span
+                >
+                <span><i class="fas fa-users"></i> 120/200</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-card">
+            <div class="event-image">
+              <img
+                src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                alt="Hackathon"
+              />
+            </div>
+            <div class="event-details">
+              <span class="event-date">22 OCT 2023</span>
+              <h3 class="event-title">Hackathon Universitario 2023</h3>
+              <div class="event-meta">
+                <span
+                  ><i class="fas fa-map-marker-alt"></i> Laboratorio de
+                  Computación</span
+                >
+                <span><i class="fas fa-users"></i> 25/30 equipos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <div class="section-title">
+        <h2>Lo que dicen nuestros usuarios</h2>
+        <p>
+          Estudiantes y organizadores comparten sus experiencias con EventQR
+        </p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>
+              EventQR ha transformado completamente cómo organizamos nuestras
+              actividades. La asistencia ha aumentado un 40% desde que
+              implementamos el sistema de registro con QR.
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <img
+                src="https://randomuser.me/api/portraits/women/44.jpg"
+                alt="María González"
+              />
+            </div>
+            <div class="author-info">
+              <h4>María González</h4>
+              <p>Directora de Actividades Estudiantiles</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>
+              Como estudiante, ahora nunca me pierdo los eventos importantes. La
+              app me envía recordatorios y puedo registrar mi asistencia en
+              segundos con mi teléfono.
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="Carlos Mendoza"
+              />
+            </div>
+            <div class="author-info">
+              <h4>Carlos Mendoza</h4>
+              <p>Estudiante de Ingeniería</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <p>
+              La plataforma es increíblemente fácil de usar. En menos de 5
+              minutos pude publicar nuestro taller y empezar a recibir
+              inscripciones de estudiantes interesados.
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <img
+                src="https://randomuser.me/api/portraits/women/68.jpg"
+                alt="Laura Jiménez"
+              />
+            </div>
+            <div class="author-info">
+              <h4>Laura Jiménez</h4>
+              <p>Coordinadora de Eventos Académicos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+      <div class="cta-content">
+        <h2>¿Listo para transformar tu experiencia universitaria?</h2>
+        <p>
+          Únete a miles de estudiantes y organizadores que ya usan EventQR para
+          gestionar su participación en eventos académicos, culturales y
+          deportivos.
+        </p>
+        <div class="hero-buttons">
+          <a href="registro.html" class="btn btn-primary">Regístrate gratis</a>
+          <a href="#features" class="btn btn-outline">Más información</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>EventQR</h3>
+          <p>
+            La plataforma líder en gestión de eventos universitarios, diseñada
+            para conectar estudiantes con actividades que enriquecen su vida
+            académica y personal.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Enlaces útiles</h3>
+          <a href="#">Eventos destacados</a>
+          <a href="#">Cómo funciona</a>
+          <a href="#">Para organizadores</a>
+          <a href="#">Preguntas frecuentes</a>
+          <a href="#">Políticas de privacidad</a>
+        </div>
+        <div class="footer-column">
+          <h3>Contacto</h3>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Av. Universitaria 123, Ciudad
+            Universitaria
+          </p>
+          <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+          <p><i class="fas fa-envelope"></i> contacto@eventqr.edu</p>
+          <p><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 18:00</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2023 EventQR. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
     <script>
-      window.addEventListener("DOMContentLoaded", function () {
-        const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
 
-        if (isLoggedIn) {
-          alert("¡Bienvenido!");
-          document.getElementById("btn-login").classList.add("hidden");
-          document.getElementById("btn-signin").classList.add("hidden");
-          document.getElementById("btn-logout").classList.remove("hidden");
-        }
-
-        const logoutBtn = document.getElementById("btn-logout");
-        if (logoutBtn) {
-          logoutBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            localStorage.removeItem("loggedIn");
-            sessionStorage.clear();
-            window.location.href = "index.html";
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
           });
-        }
+        });
+      });
+
+      // Animation for feature cards on scroll
+      const featureCards = document.querySelectorAll(".feature-card");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      featureCards.forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        observer.observe(card);
       });
     </script>
   </body>

@@ -22,9 +22,18 @@ public class UsuarioController {
     private UsuarioService serv;
 
     @PostMapping("/registrar")
-    public Usuario registrar(@RequestBody Usuario u) {    
-        return serv.registrar(u);
+    public Map<String, String> registrar(@RequestBody Usuario u) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            serv.registrar(u);
+            response.put("result", "OK");
+        } catch (IllegalArgumentException e) {
+            response.put("result", "Error");
+            response.put("message", e.getMessage());
+        }
+        return response;
     }
+
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Usuario u) {

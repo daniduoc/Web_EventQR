@@ -14,9 +14,17 @@ public class UsuarioService {
     private UsuarioRepository repo;
 
     public Usuario registrar(Usuario u){
+        if (!u.getEmail().toLowerCase().endsWith("@duocuc.cl")) {
+            throw new IllegalArgumentException("El correo debe terminar en @duocuc.cl");
+        }
+
+        if (repo.findByEmail(u.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("El correo ya está registrado");
+        }
+
         return repo.save(u);
     }
-    
+        
     public Optional<Usuario> autenticar(String email, String password){
         return repo.findByEmail(email).filter(u -> u.getPassword().equals(password));
     }
