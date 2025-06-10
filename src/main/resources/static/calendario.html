@@ -501,7 +501,7 @@
         </div>
         <div class="nav-links">
           <a href="#features">Mis Eventos</a>
-          <a href="calendario.html">Calendario</a>
+          <a href="#calendario.html">Calendario</a>
           <a href="#testimonials">Nosotros</a>
           <a href="#about">Ayuda</a>
         </div>
@@ -524,7 +524,6 @@
         const isLoggedIn = localStorage.getItem("loggedIn") === "true";
 
         if (isLoggedIn) {
-          alert("¡Bienvenido!");
           document.getElementById("btn-login").classList.add("hidden");
           document.getElementById("btn-signin").classList.add("hidden");
           document.getElementById("btn-logout").classList.remove("hidden");
