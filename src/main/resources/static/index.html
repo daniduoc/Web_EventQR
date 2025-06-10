@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EventQr</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { background-color: #2c3e50; padding: 1rem; color: white; display: flex; justify-content: space-between; align-items: center; }
+    nav a { color: white; margin-left: 1rem; text-decoration: none; }
+    .hero, .dashboard, .features, .cta { padding: 2rem; text-align: center; }
+    .hidden { display: none; }
+    .btn { padding: 0.7rem 1.5rem; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div><strong>EventQr</strong></div>
+  <nav id="nav-guest" class="">
+    <a href="login.html">Iniciar sesión</a>
+    <a href="register.html">Registrarse</a>
+  </nav>
+  <nav id="nav-user" class="hidden">
+    <a href="mis-eventos.html">Mis eventos</a>
+    <a href="eventos.html">Eventos disponibles</a>
+    <a href="#" onclick="logout()">Cerrar sesión</a>
+  </nav>
+</header>
+
+<!-- Sección para visitantes -->
+<section id="hero" class="hero">
+  <h1>Organiza y participa en eventos universitarios con EventQr</h1>
+  <p>Crea, gestiona y participa en eventos desde un solo lugar.</p>
+  <a href="register.html" class="btn">Regístrate ahora</a>
+</section>
+
+<section id="features" class="features">
+  <h2>¿Por qué usar EventQr?</h2>
+  <ul>
+    <li>✅ Crear eventos fácilmente</li>
+    <li>✅ Accede a tus eventos en "Mis eventos"</li>
+    <li>✅ Ve los eventos disponibles en tu universidad</li>
+  </ul>
+</section>
+
+<section id="cta" class="cta">
+  <h2>Empieza a usar EventQr hoy</h2>
+  <a href="register.html" class="btn">¡Únete ahora!</a>
+</section>
+
+<!-- Sección para usuarios logueados -->
+<section id="dashboard" class="dashboard hidden">
+  <h2>Hola, [Nombre del usuario]</h2>
+  <p>Tienes 3 eventos creados y 1 evento próximamente.</p>
+  <a href="crear-evento.html" class="btn">Crear nuevo evento</a>
+</section>
+
+<script>
+  // Simular si el usuario ha iniciado sesión
+  const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+
+  const navGuest = document.getElementById('nav-guest');
+  const navUser = document.getElementById('nav-user');
+  const hero = document.getElementById('hero');
+  const features = document.getElementById('features');
+  const cta = document.getElementById('cta');
+  const dashboard = document.getElementById('dashboard');
+
+  if (isLoggedIn) {
+    navGuest.classList.add('hidden');
+    navUser.classList.remove('hidden');
+    hero.classList.add('hidden');
+    features.classList.add('hidden');
+    cta.classList.add('hidden');
+    dashboard.classList.remove('hidden');
+  }
+
+  function logout() {
+    localStorage.removeItem('loggedIn');
+    location.reload();
+  }
+</script>
+
+</body>
+</html>

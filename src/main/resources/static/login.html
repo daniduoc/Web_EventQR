@@ -250,7 +250,7 @@
             .then(data => { // Manejamos la respuesta del servidor 
                 if (data.result === "OK") { // Si la validacion es correcta 
                     sessionStorage.setItem("nombreUsuario", data.nombre); // Se muestra el nombre
-                    window.location.href = "/eventos.html"; // Se carga el index
+                    window.location.href = "/index.html"; // Se carga el index
                 } else { // Si la validacion es incorrecta
                     alert("Acceso ha sido denegado."); // se niega el acceso
                 }
