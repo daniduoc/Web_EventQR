@@ -354,7 +354,7 @@
     </header>
     <div class="container">
       <div class="page-header">
-        <h1 class="page-title">Próximos Eventos Universitarios</h1>
+        <h1 class="page-title">Mis Eventos</h1>
       </div>
 
       <div class="search-filter">
@@ -376,82 +376,6 @@
     </div>
 
     <script src="/js/app_navbar.js"></script>
-    <script src="/js/app_eventos.js"></script>
-    <script src="/js/app_inscripcion.js"></script>
-    <script>
-      // Función para manejar la inscripción a eventos
-      document.querySelectorAll(".btn-primary").forEach((button) => {
-        button.addEventListener("click", function (e) {
-          if (!this.classList.contains("btn-disabled")) {
-            const eventTitle =
-              this.closest(".event-card").querySelector(
-                ".event-title"
-              ).textContent;
-            if (
-              confirm(
-                `¿Estás seguro que quieres inscribirte a "${eventTitle}"?`
-              )
-            ) {
-              this.textContent = "Inscrito ✓";
-              this.classList.add("btn-disabled");
-              this.classList.remove("btn-primary");
-
-              // Actualizar contador de participantes (simulación)
-              const participantsText = this.closest(
-                ".event-card"
-              ).querySelector(".event-meta span:last-child");
-              const [current, max] = participantsText.textContent
-                .split("/")
-                .map((str) => parseInt(str.replace(/\D/g, "")));
-              if (!isNaN(current) && !isNaN(max)) {
-                participantsText.textContent = ` ${current + 1}/${max}`;
-              }
-            }
-          }
-        });
-      });
-
-      // Función para buscar eventos
-      document
-        .querySelector(".search-bar input")
-        .addEventListener("input", function (e) {
-          const searchTerm = this.value.toLowerCase();
-          document.querySelectorAll(".event-card").forEach((card) => {
-            const title = card
-              .querySelector(".event-title")
-              .textContent.toLowerCase();
-            const description = card
-              .querySelector(".event-description")
-              .textContent.toLowerCase();
-            if (
-              title.includes(searchTerm) ||
-              description.includes(searchTerm)
-            ) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-
-      // Función para filtrar eventos por categoría
-      document
-        .querySelector(".filter-dropdown select")
-        .addEventListener("change", function (e) {
-          const filterValue = this.value;
-          document.querySelectorAll(".event-card").forEach((card) => {
-            if (
-              filterValue === "" ||
-              card
-                .querySelector(".tag")
-                .classList.contains(`tag-${filterValue}`)
-            ) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-    </script>
+    <script src="/js/app_mis_eventos.js"></script>
   </body>
 </html>
