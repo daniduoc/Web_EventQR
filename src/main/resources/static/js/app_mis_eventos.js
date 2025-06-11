@@ -60,7 +60,7 @@ async function listarEventosInscritos() {
                     <div class="event-actions">
                         <button class="btn btn-primary" onclick="inscripcion.inscribir(${
                           evento.id
-                        })">Inscribirme</button>
+                        })">Cancelar</button>
                         <button class="btn btn-outline">Ver detalles</button>
                     </div>
                 </div>

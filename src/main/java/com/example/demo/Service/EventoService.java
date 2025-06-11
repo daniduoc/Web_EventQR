@@ -20,6 +20,15 @@ public class EventoService {
     public Evento registrar(Evento e){
         return repo.save(e);
     }
+
+    public Evento disminuirCupos(Long id) {
+        Evento evento = repo.findById(id)
+        .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+
+        evento.setCupos(evento.getCupos() - 1);
+        return repo.save(evento);
+    }
+
 }
 
     // @Autowired
