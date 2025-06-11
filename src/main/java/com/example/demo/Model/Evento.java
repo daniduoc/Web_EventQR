@@ -15,9 +15,12 @@ public class Evento {
     private String nombre;
     private String descripcion;
     private LocalDateTime fecha;
+    private String escuela;
+    private String ubicacion;
     private int precio;
     private int cupos;
-    private String estado;
+    private int capacidad;
+    private String imgUrl;
 
     private Long organizadorId;
 }

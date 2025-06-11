@@ -28,4 +28,9 @@ public class UsuarioService {
     public Optional<Usuario> autenticar(String email, String password){
         return repo.findByEmail(email).filter(u -> u.getPassword().equals(password));
     }
+
+    public Usuario obtenerPorEmail(String email) {
+        return repo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
+    }
 }
