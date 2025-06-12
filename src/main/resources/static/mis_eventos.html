@@ -283,25 +283,26 @@
         margin-right: 5px;
       }
 
-      .tag-academic {
+      .tag-Informática {
         background-color: #e3f2fd;
         color: #1976d2;
       }
 
-      .tag-social {
+      .tag-Diseño {
         background-color: #f3e5f5;
         color: #8e24aa;
       }
 
-      .tag-sports {
+      .tag-Salud {
         background-color: #e8f5e9;
         color: #43a047;
       }
 
-      .tag-cultural {
+      .tag-Comunicación {
         background-color: #fff8e1;
         color: #ff8f00;
       }
+
       /* Responsive Styles */
       @media (max-width: 768px) {
         .navbar {
@@ -365,17 +366,67 @@
         <div class="filter-dropdown">
           <select>
             <option value="">Todos los eventos</option>
-            <option value="academic">Académicos</option>
-            <option value="cultural">Culturales</option>
-            <option value="sports">Deportivos</option>
-            <option value="social">Sociales</option>
+            <option value="Informática">Informática</option>
+            <option value="Comunicación">Comunicación</option>
+            <option value="Diseño">Diseño</option>
+            <option value="Salud">Salud</option>
           </select>
         </div>
       </div>
       <div class="events-grid" id="events-grid"></div>
     </div>
+    <div
+      id="qrModal"
+      class="modal"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          text-align: center;
+          position: relative;
+          max-width: 300px;
+        "
+      >
+        <span
+          id="closeModal"
+          style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-weight: bold;
+          "
+          >&times;</span
+        >
+        <h3>Tu código QR</h3>
+        <div id="qrcode"></div>
+      </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="/js/app_navbar.js"></script>
+    <script src="/js/config.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("closeModal").onclick = function () {
+          document.getElementById("qrModal").style.display = "none";
+        };
+      });
+    </script>
     <script src="/js/app_mis_eventos.js"></script>
+    <script src="/js/app_inscripcion.js"></script>
   </body>
 </html>

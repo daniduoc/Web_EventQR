@@ -1,12 +1,21 @@
--- Insertar eventos con imágenes reales (usando URLs de imágenes de Unsplash)
+-- Then insert the data
+-- Eventos de Informática
 INSERT INTO evento (nombre, descripcion, fecha, escuela, ubicacion, precio, cupos, capacidad, img_url, organizador_id) VALUES
-('Conferencia de Tecnología', 'Evento anual sobre las últimas tendencias tecnológicas', '2023-11-15 09:00:00', 'Ingeniería', 'Auditorio Principal', 150, 50, 200, 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 1),
-('Feria de Empleo', 'Conecta con las mejores empresas del país', '2023-10-25 10:00:00', 'Administración', 'Plaza Central', 0, 200, 300, 'https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 2),
-('Taller de Marketing Digital', 'Aprende estrategias efectivas de marketing online', '2023-11-05 14:00:00', 'Comunicaciones', 'Sala 302', 80, 30, 40, 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 3),
-('Concierto de Jazz', 'Noche de jazz con la banda de la universidad', '2023-12-10 19:30:00', 'Artes', 'Teatro Universitario', 50, 150, 180, 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 4),
-('Exposición de Arte Contemporáneo', 'Muestra de obras de estudiantes de Bellas Artes', '2023-11-20 11:00:00', 'Artes', 'Galería Central', 20, 100, 120, 'https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 5),
-('Maratón de Programación', 'Competencia de 24 horas para desarrolladores', '2023-11-18 08:00:00', 'Ingeniería', 'Laboratorio de Computación', 0, 40, 50, 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 1),
-('Charla sobre Sostenibilidad', 'Cómo las empresas pueden ser más sostenibles', '2023-12-05 16:00:00', 'Ciencias Ambientales', 'Sala de Conferencias B', 0, 80, 100, 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 6),
-('Workshop de Fotografía', 'Técnicas avanzadas de fotografía digital', '2023-11-12 10:00:00', 'Comunicaciones', 'Estudio Fotográfico', 120, 15, 20, 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 7),
-('Torneo de Debate', 'Competencia interuniversitaria de oratoria', '2023-12-15 09:00:00', 'Derecho', 'Auditorio de Derecho', 30, 60, 80, 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 8),
-('Feria de Ciencias', 'Presentación de proyectos científicos estudiantiles', '2023-11-30 10:00:00', 'Ciencias', 'Pabellón de Ciencias', 0, 150, 200, 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80', 9);
+('Hackathon 2025', 'Competencia de desarrollo de software en 48 horas', '2025-03-15 09:00:00', 'Informática', 'Auditorio Principal, Campus Norte', 0, 50, 100, '/assets/photo-1551288049-bebda4e38f71.jpg', 1),
+('Seguridad Informática', 'Conferencia sobre ciberseguridad y protección de datos', '2025-05-10 16:30:00', 'Informática', 'Sala de Conferencias, Piso 3', 0, 80, 120, '/assets/photo-1563986768609-322da13575f3.jpg', 3);
+
+-- Eventos de Comunicación
+INSERT INTO evento (nombre, descripcion, fecha, escuela, ubicacion, precio, cupos, capacidad, img_url, organizador_id) VALUES
+('Periodismo Digital', 'Taller sobre nuevas tendencias en comunicación digital', '2025-02-18 10:00:00', 'Comunicación', 'Estudio de TV, Edificio B', 0, 25, 25, '/assets/photo-1476242906366-d8eb64c2f661.jpg', 4),
+('Festival de Cine Universitario', 'Muestra de cortometrajes realizados por estudiantes', '2025-06-05 18:00:00', 'Comunicación', 'Cine Club, Campus Central', 0, 150, 200, '/assets/photo-1517604931442-7e0c8ed2963c.jpg', 5);
+
+-- Eventos de Salud
+INSERT INTO evento (nombre, descripcion, fecha, escuela, ubicacion, precio, cupos, capacidad, img_url, organizador_id) VALUES
+('Primeros Auxilios Básicos', 'Taller práctico de atención primaria en emergencias', '2025-01-20 15:00:00', 'Salud', 'Laboratorio de Simulación, Edificio Medicina', 0, 40, 40, '/assets/photo-1576091160550-2173dba999ef.jpg', 7),
+('Nutrición Saludable', 'Conferencia sobre hábitos alimenticios para estudiantes', '2025-04-08 12:30:00', 'Salud', 'Auditorio de Ciencias de la Salud', 0, 90, 120, '/assets/photo-1490645935967-10de6ba17061.jpg', 8);
+
+-- Eventos de Diseño
+INSERT INTO evento (nombre, descripcion, fecha, escuela, ubicacion, precio, cupos, capacidad, img_url, organizador_id) VALUES
+('Exposición de Diseño Gráfico', 'Muestra de trabajos destacados de estudiantes', '2025-05-22 19:00:00', 'Diseño', 'Galería de Arte, Edificio Creativo', 0, 100, 150, '/assets/photo-1467232004584-a241de8bcf5d.jpg', 10),
+('Diseño de Interiores', 'Taller práctico sobre tendencias actuales', '2025-08-10 16:00:00', 'Diseño', 'Taller de Diseño 3, Campus Sur', 0, 20, 20, '/assets/photo-1618221195710-dd6b41faaea6.jpg', 11),
+('Moda Sostenible', 'Charla sobre diseño de moda con materiales reciclados', '2025-10-05 14:00:00', 'Diseño', 'Aula 304, Edificio de Diseño', 0, 50, 60, '/assets/photo-1489987707025-afc232f7ea0f.jpg', 12);

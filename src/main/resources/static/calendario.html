@@ -8,6 +8,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
     <style>
       :root {
         --primary-color: #3498db;
@@ -288,24 +290,44 @@
         margin-right: 5px;
       }
 
-      .tag-academic {
+      .tag-Informática {
         background-color: #e3f2fd;
         color: #1976d2;
       }
 
-      .tag-social {
+      .tag-Diseño {
         background-color: #f3e5f5;
         color: #8e24aa;
       }
 
-      .tag-sports {
+      .tag-Salud {
         background-color: #e8f5e9;
         color: #43a047;
       }
 
-      .tag-cultural {
+      .tag-Comunicación {
         background-color: #fff8e1;
         color: #ff8f00;
+      }
+
+      .periodo-header {
+        grid-column: 1 / -1;
+        margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #eee;
+      }
+
+      .periodo-header h2 {
+        margin: 0;
+        color: #333;
+        font-size: 1.5rem;
+      }
+
+      .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        width: 100%;
       }
       /* Responsive Styles */
       @media (max-width: 768px) {
@@ -370,52 +392,69 @@
         <div class="filter-dropdown">
           <select>
             <option value="">Todos los eventos</option>
-            <option value="academic">Académicos</option>
-            <option value="cultural">Culturales</option>
-            <option value="sports">Deportivos</option>
-            <option value="social">Sociales</option>
+            <option value="Informática">Informática</option>
+            <option value="Diseño">Diseño</option>
+            <option value="Comunicación">Comunicación</option>
+            <option value="Salud">Salud</option>
           </select>
         </div>
       </div>
       <div class="events-grid" id="events-grid"></div>
     </div>
+    <div
+      id="qrModal"
+      class="modal"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          text-align: center;
+          position: relative;
+          max-width: 300px;
+        "
+      >
+        <span
+          id="closeModal"
+          style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-weight: bold;
+          "
+          >&times;</span
+        >
+        <h3>Tu código QR</h3>
+        <div id="qrcode"></div>
+      </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="/js/app_navbar.js"></script>
+    <script src="/js/config.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("closeModal").onclick = function () {
+          document.getElementById("qrModal").style.display = "none";
+        };
+      });
+    </script>
     <script src="/js/app_eventos.js"></script>
     <script src="/js/app_inscripcion.js"></script>
     <script>
-      // Función para manejar la inscripción a eventos
-      document.querySelectorAll(".btn-primary").forEach((button) => {
-        button.addEventListener("click", function (e) {
-          if (!this.classList.contains("btn-disabled")) {
-            const eventTitle =
-              this.closest(".event-card").querySelector(
-                ".event-title"
-              ).textContent;
-            if (
-              confirm(
-                `¿Estás seguro que quieres inscribirte a "${eventTitle}"?`
-              )
-            ) {
-              this.textContent = "Inscrito ✓";
-              this.classList.add("btn-disabled");
-              this.classList.remove("btn-primary");
-
-              // Actualizar contador de participantes (simulación)
-              const participantsText = this.closest(
-                ".event-card"
-              ).querySelector(".event-meta span:last-child");
-              const [current, max] = participantsText.textContent
-                .split("/")
-                .map((str) => parseInt(str.replace(/\D/g, "")));
-              if (!isNaN(current) && !isNaN(max)) {
-                participantsText.textContent = ` ${current + 1}/${max}`;
-              }
-            }
-          }
-        });
-      });
-
       // Función para buscar eventos
       document
         .querySelector(".search-bar input")
@@ -439,22 +478,39 @@
           });
         });
 
-      // Función para filtrar eventos por categoría
       document
         .querySelector(".filter-dropdown select")
         .addEventListener("change", function (e) {
           const filterValue = this.value;
+
+          // Primero aplicar el filtro normal a los eventos
           document.querySelectorAll(".event-card").forEach((card) => {
-            if (
+            card.style.display =
               filterValue === "" ||
               card
                 .querySelector(".tag")
                 .classList.contains(`tag-${filterValue}`)
-            ) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
+                ? "block"
+                : "none";
+          });
+
+          // Luego manejar los títulos
+          document.querySelectorAll(".periodo-header").forEach((header) => {
+            let hasVisible = false;
+            let next = header.nextElementSibling;
+
+            while (next && !next.classList.contains("periodo-header")) {
+              if (
+                next.classList.contains("event-card") &&
+                next.style.display === "block"
+              ) {
+                hasVisible = true;
+                break;
+              }
+              next = next.nextElementSibling;
             }
+
+            header.style.display = hasVisible ? "block" : "none";
           });
         });
     </script>

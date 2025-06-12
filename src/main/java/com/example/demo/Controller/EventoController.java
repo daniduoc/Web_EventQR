@@ -35,9 +35,10 @@ public class EventoController {
 
     @PutMapping("/cupos")
     public ResponseEntity<Evento> actualizarCupos(
-        @RequestParam Long id
+        @RequestParam Long id,
+        @RequestParam int cant
     ) {
-        Evento eventoActualizado = serv.disminuirCupos(id);
+        Evento eventoActualizado = serv.aumentarCupos(id, cant);
         return ResponseEntity.ok(eventoActualizado);
     }
 

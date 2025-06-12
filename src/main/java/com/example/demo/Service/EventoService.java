@@ -3,6 +3,7 @@ package com.example.demo.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Evento;
@@ -14,47 +15,19 @@ public class EventoService {
     private EventoRepository repo;
 
     public List<Evento> getEventos() {
-        return repo.findAll();
+        return repo.findAll(Sort.by(Sort.Direction.DESC, "fecha"));
     }
 
     public Evento registrar(Evento e){
         return repo.save(e);
     }
 
-    public Evento disminuirCupos(Long id) {
+    public Evento aumentarCupos(Long id, int cant) {
         Evento evento = repo.findById(id)
         .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
 
-        evento.setCupos(evento.getCupos() - 1);
+        evento.setCupos(evento.getCupos() + cant);
         return repo.save(evento);
     }
 
 }
-
-    // @Autowired
-    // private PerfumeRepository perfumeRepository;
-
-    // public List<Perfume> getPerfumes() {
-    //     return perfumeRepository.findAll();
-    // }
-
-    // public Perfume savePerfume(Perfume perfume) {
-    //     return perfumeRepository.save(perfume);
-    // }
-
-    // public Optional<Perfume> getPerfumeId(int id) {
-    //     return perfumeRepository.findById(id);
-    // }
-    
-    // public Perfume updatePerfume(Perfume perfume) {
-    //     return perfumeRepository.save(perfume);
-    // }
-
-    // public String deletePerfume(int id) {
-    //     perfumeRepository.deleteById(id);
-    //     return "Producto eliminado";
-    // }
-
-    // public long totalPerfumes() {
-    //     return perfumeRepository.count();
-    // }

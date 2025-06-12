@@ -15,4 +15,7 @@ public class Inscripcion {
     private long eventoId;
     private long estudianteId;
     private LocalDateTime fecha;
+
+    private String codigoQr;
+    private boolean usado;
 }
