@@ -1,5 +1,11 @@
 async function listarEventos() {
-  // Obtener datos como antes
+  if (localStorage.length === 0) {
+    document.getElementById(
+      "events-grid"
+    ).innerHTML = `<h1 class="page-title">Debes iniciar sesión para ver los eventos</h1>`;
+    return;
+  }
+
   const eventosResponse = await fetch(API_EVENTOS);
   const eventos = await eventosResponse.json();
 

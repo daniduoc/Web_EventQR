@@ -15,7 +15,7 @@ public class EventoService {
     private EventoRepository repo;
 
     public List<Evento> getEventos() {
-        return repo.findAll(Sort.by(Sort.Direction.DESC, "fecha"));
+        return repo.findAll(Sort.by(Sort.Direction.ASC, "fecha"));
     }
 
     public Evento registrar(Evento e){
